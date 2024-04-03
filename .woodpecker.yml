@@ -34,7 +34,7 @@ steps:
       - ls -la
       - cd github-actions
       - ls -la
-      - go build -v -a -tags netgo -o release/linux/amd64/plugin   /tmp/github-actions/cmd
+      - go build -v -a -tags netgo -o release/linux/amd64/plugin   ./cmd
 
   build-docker:
     when:
