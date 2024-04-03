@@ -24,6 +24,8 @@ steps:
     image: alpine
     commands:
       - ls -la
+      - mv github-actions/ ./
+      - ls -la
 
   build-go:
     when:
