@@ -15,6 +15,11 @@ steps:
       depth: 0
       path: ./
 
+  verify:
+    image: alpine
+    commands:
+      - ls -la
+
   build-go:
     when:
       branch: main
