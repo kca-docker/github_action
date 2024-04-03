@@ -20,7 +20,7 @@ steps:
       branch: main
     image: alpinelinux/golang
     volumes:
-      - .:/tmp/github-actions
+      - ./:/tmp/github-actions
     commands:
       - export GOOS=linux
       - export GOARCH=amd64
