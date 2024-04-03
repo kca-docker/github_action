@@ -14,29 +14,25 @@ steps:
       - ${CI_WORKSPACE}:/git
     commands:
       - git clone https://github.com/drone-plugins/github-actions.git
-#    image: woodpeckerci/plugin-git
-#    settings:
-#      remote: https://github.com/drone-plugins/github-actions.git
-#      depth: 0
-#      path: ${CI_WORKSPACE}
 
   verify:
     image: alpine
     commands:
+      - ls -la
+      - cd github-actions
       - ls -la
 
   build-go:
     when:
       branch: main
     image: alpinelinux/golang
-    volumes:
-      - ${CI_WORKSPACE}/github-actions:/tmp/github-actions
     commands:
       - export GOOS=linux
       - export GOARCH=amd64
       - export CGO_ENABLED=0
       - export GO111MODULE=on
-      - cd /tmp/github-actions
+      - ls -la
+      - cd github-actions
       - ls -la
       - go build -v -a -tags netgo -o release/linux/amd64/plugin   /tmp/github-actions/cmd
 
