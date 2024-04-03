@@ -13,7 +13,7 @@ steps:
     volumes:
       - ${CI_WORKSPACE}:/git
     commands:
-      - git clone https://github.com/drone-plugins/github-actions.git
+      - git clone https://github.com/drone-plugins/github-actions.git .
 #    image: woodpeckerci/plugin-git
 #    settings:
 #      remote: https://github.com/drone-plugins/github-actions.git
@@ -23,8 +23,6 @@ steps:
   verify:
     image: alpine
     commands:
-      - ls -la
-      - mv ${CI_WORKSPACE}/github-actions/* -t ${CI_WORKSPACE}
       - ls -la
 
   build-go:
