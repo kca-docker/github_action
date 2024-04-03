@@ -21,7 +21,8 @@ steps:
       - ls -la
       - cd github-actions
       - ls -la
-      - mkdir {build,mod}cache
+      - mkdir buildcache
+      - mkdir modcache
       - ls -la
 
   build-go:
