@@ -37,7 +37,7 @@ steps:
       - export GO111MODULE=on
       - export GOCACHE=${CI_WORKSPACE}/github-actions/cache.build.d
       - export GOMODCACHE=${CI_WORKSPACE}/github-actions/cache.mod.d
-      - ls -la
+      - whoami
       - cd github-actions
       - ls -la
       - go build -v -a -tags netgo -o release/linux/amd64/plugin   ./cmd
