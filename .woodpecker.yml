@@ -9,9 +9,14 @@ steps:
   prepare:
     when:
       branch: main
-    image: woodpeckerci/plugin-git
-    settings:
-      remote: https://github.com/drone-plugins/github-actions.git
+    image: alpine/git
+    volumes:
+      - ${CI_WORKSPACE}:/git
+    commands:
+      - git clone https://github.com/drone-plugins/github-actions.git
+#    image: woodpeckerci/plugin-git
+#    settings:
+#      remote: https://github.com/drone-plugins/github-actions.git
 #      depth: 0
 #      path: ${CI_WORKSPACE}
 
