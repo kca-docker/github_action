@@ -19,11 +19,10 @@ steps:
     image: alpine
     commands:
       - ls -la
+      - mkdir github-actions/cache.build.d
+      - mkdir github-actions/cache.mod.d
+      - chmod 777 -R github-actions
       - cd github-actions
-      - ls -la
-      - mkdir cache.build.d
-      - mkdir cache.mod.d
-      - chmod 777 cache.*.d
       - ls -la
 
   build-go:
@@ -31,16 +30,15 @@ steps:
       branch: main
     image: alpinelinux/golang
     commands:
+      - whoami
+      - id -u $(whoami)
       - export GOOS=linux
       - export GOARCH=amd64
       - export CGO_ENABLED=0
       - export GO111MODULE=on
       - export GOCACHE=${CI_WORKSPACE}/github-actions/cache.build.d
       - export GOMODCACHE=${CI_WORKSPACE}/github-actions/cache.mod.d
-      - whoami
-      - cd github-actions
-      - ls -la
-      - go build -v -a -tags netgo -o release/linux/amd64/plugin   ./cmd
+      - go build -v -a -tags netgo -o ${CI_WORKSPACE}/github-actions/release/linux/amd64/plugin   ${CI_WORKSPACE}/github-actions/cmd
 
   build-docker:
     when:
