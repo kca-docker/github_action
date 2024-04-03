@@ -1,6 +1,6 @@
 ---
 variables:
-  - &file Dockerfile
+  - &file github-actions/Dockerfile
   - &dhub https://index.docker.io/v1/
   - &repo bksolutions/github_actions
   - &arch linux/amd64
@@ -13,7 +13,7 @@ steps:
     volumes:
       - ${CI_WORKSPACE}:/git
     commands:
-      - git clone https://github.com/drone-plugins/github-actions.git .
+      - git clone https://github.com/drone-plugins/github-actions.git
 #    image: woodpeckerci/plugin-git
 #    settings:
 #      remote: https://github.com/drone-plugins/github-actions.git
@@ -30,7 +30,7 @@ steps:
       branch: main
     image: alpinelinux/golang
     volumes:
-      - ${CI_WORKSPACE}:/tmp/github-actions
+      - ${CI_WORKSPACE}/github-actions:/tmp/github-actions
     commands:
       - export GOOS=linux
       - export GOARCH=amd64
