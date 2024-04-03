@@ -22,6 +22,7 @@ steps:
       - mkdir github-actions/cache.build.d
       - mkdir github-actions/cache.mod.d
       - chmod 777 -R github-actions
+      - chown 1000:root -R github-actions
       - cd github-actions
       - ls -la
 
@@ -38,7 +39,8 @@ steps:
       - export GO111MODULE=on
       - export GOCACHE=${CI_WORKSPACE}/github-actions/cache.build.d
       - export GOMODCACHE=${CI_WORKSPACE}/github-actions/cache.mod.d
-      - go build -v -a -tags netgo -o ${CI_WORKSPACE}/github-actions/release/linux/amd64/plugin   ${CI_WORKSPACE}/github-actions/cmd
+      - cd github-actions
+      - go build -v -a -tags netgo -o release/linux/amd64/plugin   ./cmd
 
   build-docker:
     when:
