@@ -13,7 +13,7 @@ steps:
     settings:
       remote: https://github.com/drone-plugins/github-actions.git
       depth: 0
-      path: .
+      path: ./
 
   build-go:
     when:
