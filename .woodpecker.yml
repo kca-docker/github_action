@@ -1,0 +1,50 @@
+---
+variables:
+  - &file Dockerfile
+  - &dhub https://index.docker.io/v1/
+  - &repo bksolutions/github_actions
+  - &arch linux/amd64
+
+steps:
+  prepare:
+    when:
+      branch: main
+    image: woodpeckerci/plugin-git
+    settings:
+      remote: https://github.com/drone-plugins/github-actions.git
+      depth: 0
+      path: .
+
+  build-go:
+    when:
+      branch: main
+    image: alpinelinux/golang
+    volumes:
+      - .:/tmp/github-actions
+    commands:
+      - export GOOS=linux
+      - export GOARCH=amd64
+      - export CGO_ENABLED=0
+      - export GO111MODULE=on
+      - cd /tmp/github-actions
+      - ls -la
+      - go build -v -a -tags netgo -o release/linux/amd64/plugin   ./cmd
+
+  build-docker:
+    when:
+      branch: main
+    image: woodpeckerci/plugin-docker-buildx
+    settings:
+      dockerfile: *file
+      platforms: *arch
+      dry_run: false
+      repo: *repo
+      tags: 
+        - 'latest'
+      registry: *dhub
+      logins:
+        - registry: *dhub
+          username:
+            from_secret: DOCKER_BKSOL_USER
+          password:
+            from_secret: DOCKER_BKSOL_PASS
