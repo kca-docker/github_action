@@ -12,8 +12,8 @@ steps:
     image: woodpeckerci/plugin-git
     settings:
       remote: https://github.com/drone-plugins/github-actions.git
-      depth: 0
-      path: ${CI_WORKSPACE}
+#      depth: 0
+#      path: ${CI_WORKSPACE}
 
   verify:
     image: alpine
