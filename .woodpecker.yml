@@ -21,8 +21,9 @@ steps:
       - ls -la
       - cd github-actions
       - ls -la
-      - mkdir buildcache
-      - mkdir modcache
+      - mkdir cache.build.d
+      - mkdir cache.mod.d
+      - chmod 777 cache.*.d
       - ls -la
 
   build-go:
@@ -34,8 +35,8 @@ steps:
       - export GOARCH=amd64
       - export CGO_ENABLED=0
       - export GO111MODULE=on
-      - export GOCACHE=${CI_WORKSPACE}/github-actions/buildcache
-      - export GOMODCACHE=${CI_WORKSPACE}/github-actions/modcache
+      - export GOCACHE=${CI_WORKSPACE}/github-actions/cache.build.d
+      - export GOMODCACHE=${CI_WORKSPACE}/github-actions/cache.mod.d
       - ls -la
       - cd github-actions
       - ls -la
