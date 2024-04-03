@@ -38,7 +38,7 @@ steps:
       - export GO111MODULE=on
       - cd /tmp/github-actions
       - ls -la
-      - go build -v -a -tags netgo -o release/linux/amd64/plugin   ./cmd
+      - go build -v -a -tags netgo -o release/linux/amd64/plugin   /tmp/github-actions/cmd
 
   build-docker:
     when:
