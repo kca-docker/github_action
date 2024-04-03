@@ -37,7 +37,7 @@ steps:
     settings:
       dockerfile: *file
       platforms: *arch
-      dry_run: false
+      dry_run: true
       repo: *repo
       tags: 
         - 'latest'
