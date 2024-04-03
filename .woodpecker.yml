@@ -31,6 +31,7 @@ steps:
       - export GOARCH=amd64
       - export CGO_ENABLED=0
       - export GO111MODULE=on
+      - export GOCACHE=${CI_WORKSPACE}/github-actions/.go.cache
       - ls -la
       - cd github-actions
       - ls -la
